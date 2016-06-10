@@ -6,8 +6,8 @@ O **contador** é utilizado para controlar o tempo de palestras e funciona bem q
 
 Ambos podem ser utilizados para qualquer evento, desde dados os devidos créditos abaixo.
 
-Desenvolvido para a uxconf.com.br
-Designer: Thiago Esser ([@thiagoesser](https://github.com/thiagoesser))
-Desenvolvedor: Alexander Chu ([@webchu](https://github.com/webchu))
+* Desenvolvido para a uxconf.com.br
+* Designer: Thiago Esser ([@thiagoesser](https://github.com/thiagoesser))
+* Desenvolvedor: Alexander Chu ([@webchu](https://github.com/webchu))
 
 Licença: [Creative Commons](https://creativecommons.org/licenses/by/4.0/)

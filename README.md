@@ -1,6 +1,6 @@
 # Readme
 
-Contador e sorteador originalmente desenvolvido para a [UXConf BR](https://www.uxconf.com.br), conferência brasileira sobre User Experience. 
+Contador e sorteador originalmente desenvolvido para a [UXConf BR](http://www.uxconf.com.br), conferência brasileira sobre User Experience. 
 
 O [**contador**](https://thiagoesser.github.io/uxconf/countdown.html) é utilizado para controlar o tempo de palestras e funciona bem quando está voltado para o público. O [**sorteador**](https://thiagoesser.github.io/uxconf/random.html) deve ser alimentado com os nomes de quem é elegível para receber brindes.
 

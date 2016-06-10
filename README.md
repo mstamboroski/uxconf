@@ -9,5 +9,4 @@ Ambos podem ser utilizados para qualquer evento, desde dados os devidos crédito
 * Desenvolvido para a uxconf.com.br
 * Designer: Thiago Esser ([@thiagoesser](https://github.com/thiagoesser))
 * Desenvolvedor: Alexander Chu ([@webchu](https://github.com/webchu))
-
-Licença: [Creative Commons](https://creativecommons.org/licenses/by/4.0/)
+* Licença: [CC BY](https://creativecommons.org/licenses/by/4.0/)

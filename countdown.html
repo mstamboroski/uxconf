@@ -3,6 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Countdown</title>
+	<!--
+	 Original by Thiago Esser (@thiagoesser) & Alexander Chu (@webchu) for UXConfBR (http://www.uxconf.com.br)
+	 View project on GitHub: https://github.com/thiagoesser/uxconf
+	 (CC BY) 2016
+	 -->
 
 	<style>
 		#countdown,body{font-family:sans-serif;text-align:center}#countdown,#countdown div>span,#countdown>div{display:inline-block}body{background-color:#206CB4;transition:background-color 2s ease-in-out;font-weight:400}body.alert{animation:alert .7s infinite alternate}body.finish{background-color:#B90000}#countdown{color:#fff;font-size:25em}#countdown div>span{border-radius:3px;text-shadow:10px 20px 10px rgba(255,255,255,.05)}.smalltext{padding-top:5px;font-size:16px}.wrapper-days,.wrapper-hours{display:none!important}.wrapper-minutes:after{content:":"}.applauses{background-color:#F9FD55;color:#B90000;font-size:130px;font-weight:700;width:900px;height:300px;line-height:300px;position:fixed;left:50%;margin-left:-450px;margin-right:-450px;bottom:-400px;transform:rotate(-5deg) scale(0);top:170px;margin-top:-150px;transition:all 1s ease-in-out}body.finish .applauses{transform:rotate(-5deg) scale(1);color:#B90000}@keyframes alert{0%{background-color:#DC4949}100%{background-color:#B90000}}@keyframes blink{0%{opacity:1}50%{opacity:.5}}@media only screen and (max-width:640px){body{font-size:10px}}

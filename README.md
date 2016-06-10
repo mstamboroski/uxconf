@@ -10,3 +10,5 @@ Ambos podem ser utilizados para qualquer evento, com as devidas adaptações, de
 * Designer: Thiago Esser ([@thiagoesser](https://github.com/thiagoesser))
 * Desenvolvedor: Alexander Chu ([@webchu](https://github.com/webchu))
 * Licença: [CC BY](https://creativecommons.org/licenses/by/4.0/)
+
+Link para os arquivos fonte: (https://github.com/thiagoesser/uxconf/tree/gh-pages)

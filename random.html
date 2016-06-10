@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Random</title>
+	<style>
+		body .actions{text-align:center;font-size:10px;text-transform:uppercase}body .wrapper{height:60px;overflow:hidden;position:fixed;top:50%;width:80%;left:50%;margin-left:-40%;border-top:1px solid #DDD;border-bottom:1px solid #DDD;margin-top:-30px}body .wrapper:after,body .wrapper:before{content:'';display:block;width:100%;position:absolute;height:15px;z-index:10}body .wrapper:before{top:0;background:linear-gradient(to bottom,#206CB4,rgba(32,108,180,.1))}body .wrapper:after{bottom:0;background:linear-gradient(to top,#206CB4,rgba(32,108,180,.1))}body .wrapper ul{display:none;position:absolute;padding:0;top:0;width:100%;margin:0 -50%;transition:all .1s ease;left:50%}body .wrapper ul.selected,body .wrapper ul.selecting{display:block}body .wrapper ul li{height:60px;line-height:60px;transition:all .2s ease-in-out;font-size:3em;list-style:none;text-align:center}body .wrapper ul li.selected{background-color:red;height:30px;font-size:30px}
+
+		body{ background-color: #206CB4;
+			font-family: sans-serif;
+			color: #fff;
+		 }
+		body .wrapper:before, body .wrapper:after {
+			box-shadow: none;
+		}
+		body .wrapper {
+			border: none;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div class="actions">
+		<a href="#self" id="play" class="play" onclick="javascript:play();"><img src="play.svg" style="
+	      width: 40px;
+	      "></a>
+	</div>
+
+	<div class="wrapper">
+		<!-- lista de nomes -->
+		<ul id="list">
+			<li>Nome 1</li>
+			<li>Nome 2</li>
+		</ul>
+	</div>
+
+	<img src="logo-ux-conf.svg" style="
+	    width: 400px;
+	    display: block;
+	    position: fixed;
+	    left: 50%;
+	    margin-left: -200px;
+	    top: 50%;
+	    margin-top: 100px;
+
+	">
+
+	<script>
+		var count = 0,
+			loop = 0,
+			list = document.getElementById('list'),
+			countNames = list.getElementsByTagName('li').length,
+			random = 0;
+
+		var sort = function() {
+			if (count >= 0) {
+				var el = list.style.top = -(count * 60) + 'px';
+			}
+
+			count++;
+
+			if ( count > 0 && count == countNames) {
+				loop++;
+				count = 0;
+			}
+
+			if (loop >= 1) {
+				var el = list.style.top = -(random * 60) + 'px';
+			} else {
+				setTimeout(sort, 20);
+			}
+		}
+
+		var play = function() {
+			list.className = 'selecting';
+			count = 0,
+			loop = 0,
+			random = Math.floor(Math.random() * countNames);
+			sort();
+		};
+
+		// window.open('./random-control.html', 'Sorteio de Nomes', 'menubar=1, resizable=1, width=150, height=150');
+	</script>
+</body>
+</html>

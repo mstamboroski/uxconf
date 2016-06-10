@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Countdown</title>
+
+	<style>
+		#countdown,body{font-family:sans-serif;text-align:center}#countdown,#countdown div>span,#countdown>div{display:inline-block}body{background-color:#206CB4;transition:background-color 2s ease-in-out;font-weight:400}body.alert{animation:alert .7s infinite alternate}body.finish{background-color:#B90000}#countdown{color:#fff;font-size:25em}#countdown div>span{border-radius:3px;text-shadow:10px 20px 10px rgba(255,255,255,.05)}.smalltext{padding-top:5px;font-size:16px}.wrapper-days,.wrapper-hours{display:none!important}.wrapper-minutes:after{content:":"}.applauses{background-color:#F9FD55;color:#B90000;font-size:130px;font-weight:700;width:900px;height:300px;line-height:300px;position:fixed;left:50%;margin-left:-450px;margin-right:-450px;bottom:-400px;transform:rotate(-5deg) scale(0);top:170px;margin-top:-150px;transition:all 1s ease-in-out}body.finish .applauses{transform:rotate(-5deg) scale(1);color:#B90000}@keyframes alert{0%{background-color:#DC4949}100%{background-color:#B90000}}@keyframes blink{0%{opacity:1}50%{opacity:.5}}@media only screen and (max-width:640px){body{font-size:10px}}
+	</style>
+</head>
+<body>
+	<div id="countdown">
+		<div class="wrapper-days">
+			<span class="days"></span>
+		</div>
+		<div class="wrapper-hours">
+			<span class="hours"></span>
+		</div>
+		<div class="wrapper-minutes"><span class="minutes"></span></div><div class="wrapper-seconds"><span class="seconds" style="width: 500px;">30</span></div>
+	</div>
+
+	<img src="logo-ux-conf.svg" style="
+			    width: 400px;
+			    display: block;
+			    margin: 0 auto 30px;
+	      ">
+
+	<div id="actions">
+	   <a href="#start" id="play"><img src="play.svg" style="
+	      width: 40px;
+	      margin-right: 10px;
+	      "></a>
+	   <a href="#pause" id="pause"><img src="pause.svg" style="
+	      width: 40px;
+	      margin-right: 10px;
+	      "></a>
+	   <a href="#reset" id="reset"><img src="replay.svg" style="
+	      width: 30px;
+	      "></a>
+	   <select id="time" style="
+	      background-color: #fff;
+	      background-image: none;
+	      border: 1px solid #fff;
+	      border-radius: 4px;
+	      font-size: 24px;
+	      height: 54px;
+	      width: 120px;
+	      padding: 10px;
+	      position: relative;
+	      top: -12px;
+	      display: block;
+	      margin: 40px auto;
+	      " onchange="changeTime()">
+	      <option value="01:00">01:00</option>
+	      <option value="05:00">05:00</option>
+	      <option value="20:00">20:00</option>
+	   </select>
+	</div>
+
+	<div class="applauses">
+		<span>APLAUSOS</span>
+	</div>
+	
+	<script>
+		window.name = 'countdown';
+		
+		var countdown = {
+			getDateActual: function() {
+				return Date.parse(new Date());
+			},
+			setDateActual: function() {
+				countdown.dateActual = countdown.getDateActual();
+			},
+			timeinterval: 0,
+			endtime: 0,
+			dateActual: 0,
+			seconds: 0,
+			minutes: 0,
+			data: {
+				countdown: 0,
+				daysSpan: 0,
+				hoursSpan: 0,
+				minutesSpan: 0,
+				secondsSpan: 0,
+			},
+			timeInitial: 0,
+			getTimeRemaining: function(endtime) {
+				var t = countdown.timeInitial;
+				var seconds = Math.floor((t / 1000) % 60);
+				var minutes = Math.floor((t / 1000 / 60) % 60);
+				var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+				var days = Math.floor(t / (1000 * 60 * 60 * 24));
+				return {
+					'total': t,
+					'days': days,
+					'hours': hours,
+					'minutes': minutes,
+					'seconds': seconds
+				};
+			},
+			initialize: function(id, endtime) {
+				var self = this;
+				countdown.setDateActual();
+
+				document.body.className = '';
+
+				countdown.data.countdown = document.getElementById(id);
+				countdown.data.daysSpan = countdown.data.countdown.querySelector('.days');
+				countdown.data.hoursSpan = countdown.data.countdown.querySelector('.hours');
+				countdown.data.minutesSpan = countdown.data.countdown.querySelector('.minutes');
+				countdown.data.secondsSpan = countdown.data.countdown.querySelector('.seconds');
+
+				countdown.set(endtime);
+			},
+			update: function() {
+				
+				var self = this,
+					t = countdown.getTimeRemaining(countdown.endtime);
+
+				if (t.minutes == 0 && t.seconds <= 15) {
+					document.body.className = "alert";
+				}
+
+				countdown.data.daysSpan.innerHTML = t.days;
+				countdown.data.hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+				countdown.data.minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+				countdown.data.secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+				if (t.total <= 0) {
+					clearInterval(countdown.timeinterval);
+					document.body.className = "finish";
+				}
+				countdown.timeInitial = countdown.timeInitial - 1000;
+			},
+			pause: function() {
+				clearInterval(countdown.timeinterval);
+			},
+			start: function() {
+				countdown.setDateActual();
+				countdown.timeinterval = setInterval(countdown.update, 1000);
+			},
+			reset: function() {
+				deadline = countdown.getDeadline(countdown.minutes, countdown.seconds);
+				countdown.initialize('countdown', deadline);
+				countdown.pause();
+			},
+			set: function(endtime) {
+				countdown.endtime = endtime;
+				countdown.timeInitial = Date.parse(countdown.endtime) - countdown.getDateActual();
+				countdown.update();
+			},
+			getDeadline: function(minutes, seconds) {
+				var date1 = new Date (),
+					date2 = new Date ( date1 );
+
+				countdown.minutes = minutes;
+				countdown.seconds = seconds;
+
+				date2.setMinutes ( date1.getMinutes() + parseFloat(minutes) );
+				date2.setSeconds ( date1.getSeconds() + parseFloat(seconds) );
+				return date2;
+			}
+
+		};
+
+		var deadline = countdown.getDeadline(0,30);
+		countdown.initialize('countdown', deadline);
+
+		window.onhashchange = function() {
+			var hash = document.location.hash.replace('#','');
+			switch (hash) {
+				case 'start':
+					countdown.start();
+				break;
+
+				case 'pause':
+					countdown.pause();
+				break;
+
+				case 'reset':
+					countdown.reset();
+				break;
+
+				default:
+					if (/^[0-9]{2}\:[0-9]{2}$/.test(hash)) {
+						var time = hash.split(':');
+						var deadline = countdown.getDeadline(time[0],time[1]);
+						countdown.initialize('countdown', deadline);
+						countdown.pause();
+					}
+					
+				break;
+			}
+		};
+
+		var changeTime = function() {
+			var time = document.getElementById('time').value;
+			document.location.hash = '#' + time;
+		};
+		
+		// window.open('./countdown-control.html', 'Countdown Control', 'menubar=1, resizable=1, width=150, height=150');
+	</script>
+</body>
+</html>

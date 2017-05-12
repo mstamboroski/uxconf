@@ -11,4 +11,8 @@ Ambos podem ser utilizados para qualquer evento, com as devidas adaptações, de
 * Desenvolvedor: Alexander Chu ([@webchu](https://github.com/webchu))
 * Licença: [CC BY](https://creativecommons.org/licenses/by/4.0/)
 
+## Para quem quer customizar 
 Link para os arquivos fonte (branch): https://github.com/thiagoesser/uxconf/tree/gh-pages
+
+## Para quem precisa outras opções de tempo no contador
+Basta editar a url acrescentando o tempo customizado. Ex.: ../countdown.html#02:00

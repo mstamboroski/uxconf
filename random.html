@@ -52,11 +52,13 @@
 
 	">
 
+	<input type="file" id="files" name="files[]" multiple />
+
 	<script>
 		var count = 0,
 			loop = 0,
 			list = document.getElementById('list'),
-			countNames = list.getElementsByTagName('li').length,
+			countNames,
 			random = 0;
 
 		var sort = function() {
@@ -79,6 +81,7 @@
 		}
 
 		var play = function() {
+			countNames = list.getElementsByTagName('li').length,
 			list.className = 'selecting';
 			count = 0,
 			loop = 0,
@@ -87,6 +90,30 @@
 		};
 
 		// window.open('./random-control.html', 'Sorteio de Nomes', 'menubar=1, resizable=1, width=150, height=150');
+
+		function handleFileSelect(evt) {
+		    var files = evt.target.files;
+
+		    for (var i = 0, f; f = files[i]; i++) {
+
+				var reader = new FileReader();
+
+				reader.onload = (function(theFile) {
+					return function(e) {
+						console.log(e.target.result);
+						var names = e.target.result.split('\n');
+						var html = '';
+						for (var i in names) {
+							html += '<li>' + names[i] + '</li>';
+						}
+						var el = document.getElementById('list');
+						el.innerHTML = html;
+					};
+				})(f);
+		      	reader.readAsText(f);
+		    }
+		}
+		document.getElementById('files').addEventListener('change', handleFileSelect, false);
 	</script>
 </body>
 </html>

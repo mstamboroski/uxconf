@@ -1,15 +1,18 @@
 body {
-	//font-family: sans-serif;
+	background-color: #206CB4;
+	font-family: 'Share Tech Mono', monospace;
+	color: #fff;
 	.actions {
 		text-align: center;
 		font-size: 10px;
 		text-transform: uppercase;
+		margin-top: 300px;
 	}
 	.wrapper {
-		height: 60px;
+		height: 120px;
 		overflow: hidden;
-		position: fixed;
-		top: 50%;
+		position: absolute;
+		top: 150px;
 		width: 80%;
 		left: 50%;
 		margin-left: -40%;
@@ -59,10 +62,10 @@ body {
 
 			li {
 				//padding: 30px 0;
-				height: 60px;
-				line-height: 60px;
+				height: 120px;
+				line-height: 120px;
 				transition: all .2s ease-in-out;
-				font-size: 3em;
+				font-size: 8em;
 				list-style: none;
 				text-align: center;
 
@@ -70,6 +73,13 @@ body {
 					background-color: red;
 					height: 30px;
 					font-size: 30px;
+				}
+
+				&.none {
+					text-decoration: line-through;
+					opacity: 0.5;
+					//color: #999;
+					text-shadow: 3px 3px 5px rgba(white, 0.3);
 				}
 			}
 		}

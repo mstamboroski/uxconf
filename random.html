@@ -9,10 +9,10 @@
 	 (CC BY) 2016
 	 -->
 	
-	<!-- <link rel="stylesheet" href="/css/random.css"> -->
+	<link rel="stylesheet" href="/css/random.css">
 	<style>
 		@import url('./fonts/ShareTechMono-Regular.ttf');
-		@import url('./css/random.css');
+		/*@import url('./css/random.css');*/
 		
 		body .wrapper:before, body .wrapper:after {
 			box-shadow: none;
@@ -45,7 +45,7 @@
 	    position: fixed;
 	    left: 50%;
 	    margin-left: -200px;
-	    top: 350px;
+	    top: 400px;
 	    margin-top: 100px;
 
 	">
@@ -61,7 +61,7 @@
 
 		var sort = function() {
 			if (count >= 0) {
-				var el = list.style.top = -(count * 120) + 'px';
+				var el = list.style.top = -(count * 240) + 'px';
 			}
 
 			count++;
@@ -72,7 +72,7 @@
 			}
 
 			if (loop >= 1) {
-				var el = list.style.top = -(random * 120) + 'px';
+				var el = list.style.top = -(random * 240) + 'px';
 			} else {
 				setTimeout(sort, 20);
 			}
@@ -100,9 +100,9 @@
 					var html = '';
 					for (var i in names) {
 						if (names[i].charAt(0) == '#') {
-							html += '<li class="none">' + names[i].substr(1) + '</li>';
+							html += '<li class="none"><span>' + names[i].substr(1) + '</span></li>';
 						} else {
-							html += '<li>' + names[i] + '</li>';
+							html += '<li><span>' + names[i] + '</span></li>';
 						}
 					}
 					var el = document.getElementById('list');

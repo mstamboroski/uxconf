@@ -1,5 +1,13 @@
 # Readme 
 
+Modificações realizadas para utilização do sorteador no evento ISA 2017 Florianópolis. 
+
+Mantida a mesma organização de branches.
+
+Créditos e demais informações seguem abaixo.
+
+--------------------------------------------------------------------------------------
+
 Contador e sorteador originalmente desenvolvido para a [UXConf BR](http://www.uxconf.com.br), conferência brasileira sobre User Experience. 
 
 O [**contador**](https://thiagoesser.github.io/uxconf/countdown.html) é utilizado para controlar o tempo de palestras e funciona bem quando está voltado para o público. O [**sorteador**](https://thiagoesser.github.io/uxconf/random.html) deve ser alimentado com os nomes de quem é elegível para receber brindes.

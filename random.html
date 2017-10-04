@@ -36,20 +36,20 @@
 		<a href="#self" id="play" class="play" onclick="javascript:play();"><img src="play.svg" style="
 	      width: 80px;
 	      "></a>
+	    <div>
+			<input type="file" id="csv-file-input" onchange="handleFiles(this.files)" accept=".csv" 
+			style="margin-top: 20px"/>
+		</div>
 	</div>
 
-	<img src="logo-ux-conf.svg" style="
-	    width: 400px;
+	<img src="assets/logo-isa.svg" style="
 	    display: block;
 	    position: fixed;
 	    left: 50%;
 	    margin-left: -200px;
 	    top: 400px;
 	    margin-top: 100px;
-
 	">
-
-	<input type="file" id="file" name="file" style="display: none;" />
 
 	<script>
 		var count = 0,
@@ -86,43 +86,55 @@
 			sort();
 		};
 
-		// window.open('./random-control.html', 'Sorteio de Nomes', 'menubar=1, resizable=1, width=150, height=150');
+	  function handleFiles(files) {
+      // Check for the various File API support.
+      if (window.FileReader) {
+          // FileReader are supported.
+          getAsText(files[0]);
+      } else {
+          alert('FileReader are not supported in this browser.');
+      }
+    }
 
-		function handleFileSelect(evt) {
-		    var file = evt.target.files;
+    function loadHandler(event) {
+      var csv = event.target.result;
+      processData(csv);
+    }
 
-			var reader = new FileReader();
+    function getAsText(fileToRead) {
+      var reader = new FileReader();
+      // Read file into memory as UTF-8      
+      reader.readAsText(fileToRead);
+      // Handle errors load
+      reader.onload = loadHandler;
+      reader.onerror = errorHandler;
+    }
 
-			reader.onload = (function(theFile) {
-				return function(e) {
-					var names = e.target.result.split('\n');
-					var html = '';
-					for (var i in names) {
-						if (names[i].charAt(0) == '#') {
-							html += '<li class="none"><span>' + names[i].substr(1) + '</span></li>';
-						} else {
-							html += '<li><span>' + names[i] + '</span></li>';
-						}
-					}
-					var el = document.getElementById('list');
-					el.innerHTML = html;
-				};
-			})(file[0]);
-	      	reader.readAsText(file[0]);
-		}
-		document.getElementById('file').addEventListener('change', handleFileSelect, false);
-	</script>
+    function processData(csv) {
+        var allTextLines = csv.split(/\r\n|\n/);
+        var lines = [];
+        var html = '';
+        for (var i=0; i<allTextLines.length - 1; i++) {
+            var data = allTextLines[i].split(';');
+                var tarr = [];
+                for (var j=0; j<data.length; j++) {
+                    tarr.push(data[j]);
+                }
+                lines.push(tarr);
+                
+                html += '<li><span>' + tarr + '</span></li>';
+        }
+        var el = document.getElementById('list');
+		el.innerHTML = html;
+      console.log(lines);
+    }
 
-	<script>
-		$(function() {
-			$(document).on("keydown", function(e){ 
-			    e = e || window.event;
-			    var charCode = e.which || e.keyCode;
-			    if(charCode == 70) {
-					$('#file').trigger('click')
-			    }
-			});
-		});
+    function errorHandler(evt) {
+      if(evt.target.error.name == "NotReadableError") {
+          alert("Canno't read file !");
+      }
+    }
+
 	</script>
 </body>
 </html>
